@@ -1,4 +1,3 @@
-import java.lang.invoke.SwitchPoint;
 import java.time.LocalDate;
 
 public class Main {
@@ -9,6 +8,7 @@ public class Main {
         return random.nextInt(maxYear - minYear) + minYear;
     }
 
+
     public static boolean checkYear(int year) {
         if ((year % 400) == 0) {                        //метод проверки года на високосность
             return true;
@@ -17,12 +17,14 @@ public class Main {
         } else return (year % 4) == 0;
     }
 
+
     public static boolean checkOldVersion(int year, int oldVersion) {
         return (year <= oldVersion);                    //метод проверки года телефона
     }
 
+
     public static void printForOS(int os, boolean year) {
-        if (year) {
+        if (year) {                                 //метод вывода сообщения для скачивания нужной версии
             switch (os) {
                 case 0:
                     System.out.println("Установите облегченную версию приложения для iOS по ссылке");
@@ -36,16 +38,33 @@ public class Main {
                     System.out.println("Установите версию приложения для iOS по ссылке");
                     break;
                 case 1:
-                    System.out.println("Установите версию приложения для Android по ссылке");/////////////////
+                    System.out.println("Установите версию приложения для Android по ссылке");
             }
         }
     }
 
 
+    public static int checkDistance(int distance) {
+        int oneDayDistance = 20;
+        int twoDayDistance = 60;
+        int threeDayDistance = 100;
+
+        if (distance <= oneDayDistance) {
+            return 1;
+        } else if (distance <= twoDayDistance) {
+            return 2;
+        } else if (distance <= threeDayDistance) {
+            return 3;
+        } else {
+            return -1;
+        }
+    }
+
 
     public static void main(String[] args) {
         task1();
         task2();
+        task3();
 
     }
 
@@ -76,12 +95,27 @@ public class Main {
 
         int oldVersion = 2015;
         int currentYear = LocalDate.now().getYear();
-        int typeOS = generateRandomYear(0, 1);   // Здесь всегда 0, и я знаю в чем ошибка, но не могу исправить
+        int typeOS = generateRandomYear(0, 1);   // Здесь всегда 0, и я знаю в чем ошибка,
+                                                    // но не могу исправить, подскажите пожалуйста
 
         boolean version = checkOldVersion(currentYear, oldVersion);
         printForOS(typeOS, version);
 
+    }
 
 
+    public static void task3() {
+        System.out.println("\n\n" +
+                "=============================\n" +
+                "========= Задание 3 =========\n" +
+                "=============================\n");
+
+        int deliveryDistance = 95;
+        int countDay = checkDistance(deliveryDistance);
+        if (countDay == -1) {
+            System.out.println("Доставки нет");
+        } else {
+            System.out.println("Для доставки потребуется дней: " + countDay);
+        }
     }
 }
